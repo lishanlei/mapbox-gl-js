@@ -61,6 +61,7 @@ import terrainDepthVert from './terrain_depth.vertex.glsl';
 import preludeTerrainVert from './_prelude_terrain.vertex.glsl';
 import preludeFogVert from './_prelude_fog.vertex.glsl';
 import preludeFogFrag from './_prelude_fog.fragment.glsl';
+import preludeShadowFrag from './_prelude_shadow.fragment.glsl';
 import skyboxCaptureFrag from './skybox_capture.fragment.glsl';
 import skyboxCaptureVert from './skybox_capture.vertex.glsl';
 import globeFrag from './globe_raster.fragment.glsl';
@@ -74,9 +75,11 @@ import groundShadowsVert from './ground_shadow.vertex.glsl';
 
 export let preludeTerrain = {};
 export let preludeFog = {};
+export let preludeShadow = {};
 
 preludeTerrain = compile('', preludeTerrainVert, true);
 preludeFog = compile(preludeFogFrag, preludeFogVert, true);
+preludeShadow = compile(preludeShadowFrag, '', true);
 
 export const prelude = compile(preludeFrag, preludeVert);
 export const preludeCommonSource = preludeCommon;
@@ -174,6 +177,9 @@ function compile(fragmentSource, vertexSource, isGlobalPrelude) {
         }
         if (preludeFog.staticUniforms) {
             staticUniforms = preludeFog.staticUniforms.concat(staticUniforms);
+        }
+        if (preludeShadow.staticUniforms) {
+            staticUniforms = preludeShadow.staticUniforms.concat(staticUniforms);
         }
     }
 

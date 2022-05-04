@@ -20,7 +20,13 @@ uniform vec3 u_up_dir;
 uniform float u_height_lift;
 #endif
 
-varying vec3 v_pos;
+#ifdef RENDER_SHADOWS
+uniform mat4 u_light_matrix_0;
+uniform mat4 u_light_matrix_1;
+#endif
+
+varying vec4 v_pos_light_view_0;
+varying vec4 v_pos_light_view_1;
 varying vec4 v_color;
 varying vec3 v_normal;
 varying float v_depth;
@@ -79,7 +85,8 @@ void main() {
     gl_Position = mix(u_matrix * vec4(pos, 1), AWAY, hidden);
 
 #ifdef RENDER_SHADOWS
-    v_pos = pos;
+    v_pos_light_view_0 = u_light_matrix_0 * vec4(pos, 1);
+    v_pos_light_view_1 = u_light_matrix_1 * vec4(pos, 1);
     v_normal = normal;
     v_depth = gl_Position.w;
 #endif
