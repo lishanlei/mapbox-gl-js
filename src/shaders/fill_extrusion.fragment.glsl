@@ -39,7 +39,7 @@ void main() {
 #endif
 
 #ifdef FOG
-    color = fog_dither(fog_apply_premultiplied(color, v_fog_pos)).rgb;
+    color = fog_dither(fog_apply_premultiplied(color, v_fog_pos));
 #endif
     gl_FragColor = color;
 
