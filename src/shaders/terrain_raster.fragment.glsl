@@ -13,18 +13,7 @@ void main() {
     vec4 color = texture2D(u_image0, v_pos0);
 
 #ifdef RENDER_SHADOWS
-    float biasL0 = 0.002;
-    float biasL1 = 0.002;
-    float occlusionL0 = shadowOcclusionL0(v_pos_light_view_0, biasL0);
-    float occlusionL1 = shadowOcclusionL1(v_pos_light_view_1, biasL1);
-
-    float occlusion = 0.0; 
-    if (v_depth < u_cascade_distances.x)
-        occlusion = occlusionL0;
-    else if (v_depth < u_cascade_distances.y)
-        occlusion = occlusionL1;
-
-    color.xyz = color.xyz * mix(1.0, 1.0 - u_shadow_intensity, occlusion);
+    color.xyz = shadowed_color(color.xyz, v_pos_light_view_0, v_pos_light_view_1, v_depth);
 #endif
 
 #ifdef FOG
