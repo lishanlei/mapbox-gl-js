@@ -6,11 +6,6 @@ uniform float u_shadow_intensity;
 uniform float u_texel_size;
 uniform vec2 u_cascade_distances;
 
-float unpack_depth(vec4 rgba_depth) {
-    const vec4 bit_shift = vec4(1.0 / (256.0 * 256.0 * 256.0), 1.0 / (256.0 * 256.0), 1.0 / 256.0, 1.0);
-    return dot(rgba_depth, bit_shift) * 2.0 - 1.0;
-}
-
 float shadow_sample_1(vec2 uv, float compare) {
     return step(unpack_depth(texture2D(u_shadowmap_1, uv)), compare);
 }
