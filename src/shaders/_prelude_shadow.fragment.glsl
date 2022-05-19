@@ -16,14 +16,16 @@ float shadow_sample_0(vec2 uv, float compare) {
 
 float shadow_occlusion_1(vec4 pos, float bias) {
     pos.xyz /= pos.w;
+    pos.xyz = pos.xyz * 0.5 + 0.5;
     float fragDepth = min(pos.z, 0.999) - bias;
-    return shadow_sample_1(pos.xy * 0.5 + 0.5, fragDepth);
+    return shadow_sample_1(pos.xy, fragDepth);
 }
 
 float shadow_occlusion_0(vec4 pos, float bias) {
     pos.xyz /= pos.w;
+    pos.xyz = pos.xyz * 0.5 + 0.5;
     float fragDepth = min(pos.z, 0.999) - bias;
-    vec2 uv = pos.xy * 0.5 + 0.5;
+    vec2 uv = pos.xy;
 
     vec2 texel = uv / u_texel_size - vec2(1.5);
     vec2 f = fract(texel);
