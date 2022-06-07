@@ -6,7 +6,7 @@ attribute vec2 a_centroid_pos;
 #pragma mapbox: define highp float base
 #pragma mapbox: define highp float height
 
-varying float v_depth;
+varying highp float v_depth;
 
 void main() {
     #pragma mapbox: initialize highp float base
