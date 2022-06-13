@@ -17,8 +17,6 @@ float unpack_depth(vec4 rgba_depth)
     return dot(rgba_depth, bit_shift) * 2.0 - 1.0;
 }
 
-#ifdef TERRAIN
-
 // Pack depth to RGBA. A piece of code copied in various libraries and WebGL
 // shadow mapping examples.
 // https://aras-p.info/blog/2009/07/30/encoding-floats-to-rgba-the-final/
@@ -30,5 +28,3 @@ highp vec4 pack_depth(highp float ndc_z) {
     res -= res.xxyz * bit_mask;
     return res;
 }
-
-#endif
