@@ -68,8 +68,8 @@ import globeFrag from './globe_raster.fragment.glsl';
 import globeVert from './globe_raster.vertex.glsl';
 import atmosphereFrag from './atmosphere.fragment.glsl';
 import atmosphereVert from './atmosphere.vertex.glsl';
-import fillExtrusionShadowsFrag from './fill_extrusion_shadow.fragment.glsl';
-import fillExtrusionShadowsVert from './fill_extrusion_shadow.vertex.glsl';
+import fillExtrusionDepthFrag from './fill_extrusion_depth.fragment.glsl';
+import fillExtrusionDepthVert from './fill_extrusion_depth.vertex.glsl';
 import groundShadowsFrag from './ground_shadow.fragment.glsl';
 import groundShadowsVert from './ground_shadow.vertex.glsl';
 
@@ -154,7 +154,7 @@ export default {
     skyboxCapture: compile(skyboxCaptureFrag, skyboxCaptureVert),
     globeRaster: compile(globeFrag, globeVert),
     globeAtmosphere: compile(atmosphereFrag, atmosphereVert),
-    fillExtrusionShadow: compile(fillExtrusionShadowsFrag, fillExtrusionShadowsVert),
+    fillExtrusionDepth: compile(fillExtrusionDepthFrag, fillExtrusionDepthVert),
     groundShadow: compile(groundShadowsFrag, groundShadowsVert)
 };
 
