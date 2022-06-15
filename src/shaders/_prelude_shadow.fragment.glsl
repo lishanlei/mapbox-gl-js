@@ -100,7 +100,7 @@ vec3 shadowed_color_normal(
 
     float backfacing = 1.0 - smoothstep(0.0, 0.1, NDotL);
     occlusion = mix(occlusion, 1.0, backfacing);
-    color *= mix(1.0, 1.0 - u_shadow_intensity, occlusion);
+    color *= 1.0 - (u_shadow_intensity * occlusion);
     return color;
 }
 
@@ -112,7 +112,7 @@ vec3 shadowed_color(vec3 color, vec4 light_view_pos0, vec4 light_view_pos1, floa
     else if (view_depth < u_cascade_distances.y)
         occlusion = shadow_occlusion_1(light_view_pos1, bias);
 
-    color *= mix(1.0, 1.0 - u_shadow_intensity, occlusion);
+    color *= 1.0 - (u_shadow_intensity * occlusion);
     return color;
 }
 
