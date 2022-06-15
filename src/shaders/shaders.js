@@ -68,10 +68,6 @@ import globeFrag from './globe_raster.fragment.glsl';
 import globeVert from './globe_raster.vertex.glsl';
 import atmosphereFrag from './atmosphere.fragment.glsl';
 import atmosphereVert from './atmosphere.vertex.glsl';
-import fillExtrusionDepthFrag from './fill_extrusion_depth.fragment.glsl';
-import fillExtrusionDepthVert from './fill_extrusion_depth.vertex.glsl';
-import groundShadowsFrag from './ground_shadow.fragment.glsl';
-import groundShadowsVert from './ground_shadow.vertex.glsl';
 
 export let preludeTerrain = {};
 export let preludeFog = {};
@@ -153,9 +149,7 @@ export default {
     skyboxGradient: compile(skyboxGradientFrag, skyboxVert),
     skyboxCapture: compile(skyboxCaptureFrag, skyboxCaptureVert),
     globeRaster: compile(globeFrag, globeVert),
-    globeAtmosphere: compile(atmosphereFrag, atmosphereVert),
-    fillExtrusionDepth: compile(fillExtrusionDepthFrag, fillExtrusionDepthVert),
-    groundShadow: compile(groundShadowsFrag, groundShadowsVert)
+    globeAtmosphere: compile(atmosphereFrag, atmosphereVert)
 };
 
 // Expand #pragmas to #ifdefs.
