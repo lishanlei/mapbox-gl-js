@@ -61,7 +61,6 @@ import terrainDepthVert from './terrain_depth.vertex.glsl';
 import preludeTerrainVert from './_prelude_terrain.vertex.glsl';
 import preludeFogVert from './_prelude_fog.vertex.glsl';
 import preludeFogFrag from './_prelude_fog.fragment.glsl';
-import preludeShadowFrag from './_prelude_shadow.fragment.glsl';
 import skyboxCaptureFrag from './skybox_capture.fragment.glsl';
 import skyboxCaptureVert from './skybox_capture.vertex.glsl';
 import globeFrag from './globe_raster.fragment.glsl';
@@ -71,11 +70,10 @@ import atmosphereVert from './atmosphere.vertex.glsl';
 
 export let preludeTerrain = {};
 export let preludeFog = {};
-export let preludeShadow = {};
 
 preludeTerrain = compile('', preludeTerrainVert, true);
 preludeFog = compile(preludeFogFrag, preludeFogVert, true);
-preludeShadow = compile(preludeShadowFrag, '', true);
+// Shadow prelude is not compiled until GL-JS implements shadows
 
 export const prelude = compile(preludeFrag, preludeVert);
 export const preludeCommonSource = preludeCommon;
@@ -153,7 +151,7 @@ export default {
 };
 
 // Expand #pragmas to #ifdefs.
-function compile(fragmentSource, vertexSource, isGlobalPrelude) {
+export function compile(fragmentSource, vertexSource, isGlobalPrelude) {
     const pragmaRegex = /#pragma mapbox: ([\w]+) ([\w]+) ([\w]+) ([\w]+)/g;
     const uniformRegex = /uniform (highp |mediump |lowp )?([\w]+) ([\w]+)([\s]*)([\w]*)/g;
     const attributeRegex = /attribute (highp |mediump |lowp )?([\w]+) ([\w]+)/g;
@@ -171,9 +169,6 @@ function compile(fragmentSource, vertexSource, isGlobalPrelude) {
         }
         if (preludeFog.staticUniforms) {
             staticUniforms = preludeFog.staticUniforms.concat(staticUniforms);
-        }
-        if (preludeShadow.staticUniforms) {
-            staticUniforms = preludeShadow.staticUniforms.concat(staticUniforms);
         }
     }
 
