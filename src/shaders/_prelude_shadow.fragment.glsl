@@ -105,7 +105,7 @@ vec3 shadowed_color_normal(
 }
 
 vec3 shadowed_color(vec3 color, vec4 light_view_pos0, vec4 light_view_pos1, float view_depth) {
-    float bias = 0.002;
+    float bias = 0.0;
     float occlusion = 0.0;
     if (view_depth < u_cascade_distances.x)
         occlusion = shadow_occlusion_0(light_view_pos0, bias);
